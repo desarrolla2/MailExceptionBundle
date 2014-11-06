@@ -7,7 +7,7 @@ Email you when Symfony2 Exceptions occurs with some information.
 You need put something like this in your config.yml
 
 ```yml
-exception_listener:
+mail_exception:
     from: 'your@email.com'
     to: 'your@email.com'
     subject: 'An error has ocurred'

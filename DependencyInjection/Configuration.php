@@ -27,7 +27,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('exception_listener');
+        $rootNode = $treeBuilder->root('mail_exception');
 
         $rootNode
             ->addDefaultsIfNotSet()
