@@ -1,5 +1,5 @@
 {
-    "name": "desarrolla2/exception-listener-bundle",
+    "name": "desarrolla2/mail-exception-bundle",
     "description": "email exceptions for symfony2",
     "license": "MIT",
     "authors": [
