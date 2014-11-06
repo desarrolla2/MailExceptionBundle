@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="desarrolla2.exception_listener.mailer"
+                 class="Desarrolla2\Bundle\MailExceptionBundle\Mailer\Mailer">
+            <argument id="mailer" type="service"/>
+            <argument id="templating" type="service"/>
+            <argument type="string">%exception_listener.from%</argument>
+            <argument type="string">%exception_listener.to%</argument>
+            <argument type="string">%exception_listener.subject%</argument>
+        </service>
+    </services>
+</container>

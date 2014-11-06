@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" bgcolor="#eeeeee">
+{% include 'MailExceptionBundle:Mail:exception.head.html.twig' %}
+<body bgcolor="#eeeeee">
+<table class="head" bgcolor="#f6f6f6">
+  <tr>
+    <td><h1>{{ class }}</h1></td>
+  </tr>
+  <tr>
+    <td><h2>{{ message }}</h2></td>
+  </tr>
+</table>
+<table class="body" bgcolor="#ffffff">
+  <tr>
+    <h3>Information</h3>
+    <ol>
+      <li>Date: {{ 'now' | date("F jS \\a\\t g:ia") }}</li>
+      <li>Path: {{ path }}</li>
+    </ol>
+  </tr>
+</table>
+{% if get|length %}
+  <table class="body" bgcolor="#ffffff">
+    <tr>
+      <h3>Get</h3>
+      <ol>
+        {% for key, value in get %}
+          <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+      </ol>
+    </tr>
+  </table>
+{% endif %}
+{% if post|length %}
+  <table class="body" bgcolor="#ffffff">
+    <tr>
+      <h3>Post</h3>
+      <ol>
+        {% for key, value in get %}
+          <li>{{ key }}: {{ value }}</li>
+        {% endfor %}
+      </ol>
+    </tr>
+  </table>
+{% endif %}
+
+<table class="body" bgcolor="#ffffff">
+  <tr>
+    <h3>Stack Trace</h3>
+    <ol>
+      {% for line in trace %}
+        <li>{{ line }}</li>
+      {% endfor %}
+    </ol>
+  </tr>
+</table>
+</body>
+</html>
