@@ -44,7 +44,7 @@ class MailExceptionExtension extends Extension
             $container->setParameter('exception_listener.avoid.exceptions', array());
         }
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('listeners.xml');
         $loader->load('services.xml');
     }

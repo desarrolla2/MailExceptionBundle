@@ -7,8 +7,11 @@
     <services>
         <service id="desarrolla2.exception_listener.mailer"
                  class="Desarrolla2\Bundle\MailExceptionBundle\Mailer\Mailer">
-            <argument id="mailer" type="service"/>
-            <argument id="templating" type="service"/>
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="templating"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="security.context"/>
+            <argument type="service" id="session"/>
             <argument type="string">%exception_listener.from%</argument>
             <argument type="string">%exception_listener.to%</argument>
             <argument type="string">%exception_listener.subject%</argument>

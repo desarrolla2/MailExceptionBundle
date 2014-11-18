@@ -62,13 +62,12 @@ class ExceptionListener implements EventSubscriberInterface
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
-        $request = $event->getRequest();
 
         if (!$this->isValidEnvironment($this->environment) || !$this->isValidException($exception)) {
             return;
         }
 
-        $this->mailer->notify($request, $exception);
+        $this->mailer->notify($exception);
     }
 
     /**
