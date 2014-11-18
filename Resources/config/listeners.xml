@@ -6,7 +6,7 @@
 
     <services>
         <service id="desarrolla2.exception_listener.listener"
-                 class="Desarrolla2\Bundle\MailExceptionBundle\Listener\ExceptionListener">
+                 class="Desarrolla2\Bundle\MailExceptionBundle\Listener\ExceptionListener" public="false">
             <argument id="desarrolla2.exception_listener.mailer" type="service"/>
             <argument type="string">%kernel.environment%</argument>
             <argument type="string">%exception_listener.avoid.environments%</argument>
