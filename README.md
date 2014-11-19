@@ -41,7 +41,7 @@ mail_exception:
 
 ## Example
 
-When a exception occurs you will receive in out inbox something like this.
+When a exception occurs you will receive in your mail inbox something like this.
 
 ![screenshot](https://raw.githubusercontent.com/desarrolla2/MailExceptionBundle/master/Resources/doc/screenshot.png)
 
