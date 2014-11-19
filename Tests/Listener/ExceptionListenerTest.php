@@ -24,11 +24,35 @@ class ExceptionListenerTest extends \PHPUnit_Framework_TestCase
 {
     public function testOnKernelException()
     {
-        $listener = new ExceptionListener($this->getMailer());
+        $listener = new ExceptionListener($this->getMailerThatExpectsNotify());
         $listener->onKernelException($this->getGetResponseForExceptionEvent());
     }
 
-    protected function getMailer()
+    public function testOnKernelExceptionValidEnvironment()
+    {
+        $listener = new ExceptionListener($this->getMailerThatExpectsNotify(), 'env', ['other']);
+        $listener->onKernelException($this->getGetResponseForExceptionEvent());
+    }
+
+    public function testOnKernelExceptionInvalidEnvironment()
+    {
+        $listener = new ExceptionListener($this->getMailerThatNotExpectsNotify(), 'env', ['env']);
+        $listener->onKernelException($this->getGetResponseForExceptionEvent());
+    }
+
+    public function testOnKernelExceptionValidException()
+    {
+        $listener = new ExceptionListener($this->getMailerThatExpectsNotify(), 'env', [], ['UninterestingException']);
+        $listener->onKernelException($this->getGetResponseForExceptionEvent());
+    }
+
+    public function testOnKernelExceptionInvalidException()
+    {
+        $listener = new ExceptionListener($this->getMailerThatNotExpectsNotify(), 'env', [], ['Exception']);
+        $listener->onKernelException($this->getGetResponseForExceptionEvent());
+    }
+
+    protected function getMailerThatExpectsNotify()
     {
         $mailer = $this->getMockBuilder('Desarrolla2\Bundle\MailExceptionBundle\Mailer\Mailer')
             ->disableOriginalConstructor()
@@ -37,6 +61,18 @@ class ExceptionListenerTest extends \PHPUnit_Framework_TestCase
         $mailer->expects($this->once())
             ->method('notify')
             ->will($this->returnValue(1));
+
+        return $mailer;
+    }
+
+    protected function getMailerThatNotExpectsNotify()
+    {
+        $mailer = $this->getMockBuilder('Desarrolla2\Bundle\MailExceptionBundle\Mailer\Mailer')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mailer->expects($this->never())
+            ->method('notify');
 
         return $mailer;
     }
