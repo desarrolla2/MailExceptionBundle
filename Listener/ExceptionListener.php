@@ -72,7 +72,7 @@ class ExceptionListener implements EventSubscriberInterface
     }
 
     /**
-     * @param  Exception $exception
+     * @param Exception $exception
      *
      * @return bool
      */
@@ -87,7 +87,7 @@ class ExceptionListener implements EventSubscriberInterface
     }
 
     /**
-     * @param  string $env
+     * @param string $env
      *
      * @return bool
      */

@@ -9,7 +9,6 @@ tools:
         filter:
             excluded_paths:
                 - 'vendor/*'
-                - 'tests/*'
 
 
     # Code Sniffer
@@ -21,6 +20,9 @@ tools:
         filter:
             excluded_paths:
                 - 'vendor/*'
+
+
+    php_sim: false
 
 
     # Copy/Paste Detector
@@ -41,13 +43,16 @@ tools:
             excluded_paths:
                 - 'vendor/*'
 
-
-    # Analyzes the size and structure of a PHP project.
-    php_loc:
-        enabled:              true
-        command:              phploc
-        excluded_dirs:
-            - vendor
+    # PHP HHVM
+#    php_hhvm:
+#        command:              hhvm
+#        extensions:
+#            - php
+#        enabled:              true
+#        filter:
+#            excluded_paths:
+#                - 'vendor/*'
+#                - 'tests/*'
 
 
     # PHP Mess Detector (http://phpmd.org).
@@ -61,6 +66,8 @@ tools:
                 - naming
                 - design
                 - controversial
+            naming_rules:
+                short_variable:       false
         filter:
             excluded_paths:
                 - 'vendor/*'
@@ -73,6 +80,15 @@ tools:
         excluded_dirs:
             - vendor
 
+
+    # Analyzes the size and structure of a PHP project.
+    php_loc:
+        enabled:              true
+        command:              phploc
+        excluded_dirs:
+            - vendor
+
+
     # Runs Scrutinizer's PHP Analyzer Tool
     php_analyzer:
         enabled:              true
@@ -82,3 +98,4 @@ tools:
 
     # Security Advisory Checker
     sensiolabs_security_checker: true
+
