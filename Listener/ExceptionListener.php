@@ -38,17 +38,18 @@ class ExceptionListener implements EventSubscriberInterface
      */
     protected $avoidExceptions;
 
-    /*
-     'Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException',
-    'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
-    */
+    /**
+     * @var array
+     */
     protected $avoidEnvironments;
 
     /**
-     * @param array $avoidEnvironments
-     * @param array $avoidExceptions
+     * @param Mailer $mailer
+     * @param string $environment
+     * @param array  $avoidEnvironments
+     * @param array  $avoidExceptions
      */
-    public function __construct(Mailer $mailer, $environment, $avoidEnvironments = array(), $avoidExceptions = array())
+    public function __construct(Mailer $mailer, $environment = 'dev', $avoidEnvironments = [], $avoidExceptions = [])
     {
         $this->mailer = $mailer;
         $this->environment = $environment;
@@ -72,6 +73,7 @@ class ExceptionListener implements EventSubscriberInterface
 
     /**
      * @param  Exception $exception
+     *
      * @return bool
      */
     protected function isValidException(\Exception $exception)
@@ -86,6 +88,7 @@ class ExceptionListener implements EventSubscriberInterface
 
     /**
      * @param  string $env
+     *
      * @return bool
      */
     protected function isValidEnvironment($env)

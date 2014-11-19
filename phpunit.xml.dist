@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="./vendor/autoload.php" colors="true">
+
+    <testsuites>
+        <testsuite name="Desarrolla2 Mail Exception Bundle Test Suite">
+            <directory suffix="Test.php">./Tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <blacklist>
+            <directory>/usr/share/pear/</directory>
+            <directory>./build</directory>
+            <directory>./vendor</directory>
+        </blacklist>
+    </filter>
+
+    <logging>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+        <log type="coverage-html" target="build/coverage" title="Desarrolla2 Mail Exception Bundle" charset="UTF-8"
+             yui="true" highlight="true" lowUpperBound="20" highLowerBound="80"/>
+    </logging>
+</phpunit>

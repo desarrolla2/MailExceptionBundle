@@ -93,6 +93,8 @@ class Mailer
 
     /**
      * @param \Exception $exception
+     *
+     * @return int
      */
     public function notify(\Exception $exception)
     {
@@ -102,7 +104,7 @@ class Mailer
             ->setTo($this->to)
             ->setBody($this->getBody($exception), 'text/html');
 
-        $this->mailer->send($message);
+        return $this->mailer->send($message);
     }
 
     /**
