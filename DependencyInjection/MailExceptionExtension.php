@@ -31,8 +31,6 @@ class MailExceptionExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $configs = $configs[0];
-
         $container->setParameter('exception_listener.from', $config['from']);
         $container->setParameter('exception_listener.to', $config['to']);
         $container->setParameter('exception_listener.subject', $config['subject']);

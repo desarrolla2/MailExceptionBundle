@@ -67,9 +67,9 @@ class Mailer
      * @param RequestStack     $stack
      * @param SecurityContext  $context
      * @param SessionInterface $session
-     * @param $from
-     * @param $to
-     * @param $subject
+     * @param                  $from
+     * @param                  $to
+     * @param                  $subject
      */
     public function __construct(
         \Swift_Mailer $mailer,
@@ -109,6 +109,7 @@ class Mailer
 
     /**
      * @param  \Exception $exception
+     *
      * @return string
      */
     protected function getBody(\Exception $exception)
@@ -133,7 +134,7 @@ class Mailer
      */
     protected function createMessage()
     {
-        return $message = \Swift_Message::newInstance();
+        return \Swift_Message::newInstance();
     }
 
     protected function getUser()
