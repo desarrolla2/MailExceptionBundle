@@ -21,18 +21,6 @@
     </ol>
   </tr>
 </table>
-{% if session|length %}
-  <table class="body" bgcolor="#ffffff">
-    <tr>
-      <h3>Session</h3>
-      <ol>
-        {% for key, value in session %}
-          <li>{{ key }}: {{ value }}</li>
-        {% endfor %}
-      </ol>
-    </tr>
-  </table>
-{% endif %}
 {% if get|length %}
   <table class="body" bgcolor="#ffffff">
     <tr>
