@@ -122,6 +122,7 @@ class Mailer
                 'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
                 'path' => $this->request->getRequestUri(),
                 'user' => $this->getUser(),
+                'session' => $this->session->all(),
                 'get' => $this->request->query->all(),
                 'post' => $this->request->request->all(),
             ]
