@@ -13,7 +13,7 @@
  * @author Mario Young <maye.co@gmail.com>
  */
 
-namespace Desarrolla2\Bundle\MailExceptionBundle\Twig;
+namespace Desarrolla2\Bundle\MailExceptionBundle\Twig\Extension;
 
 use Symfony\Component\HttpKernel\DataCollector\Util\ValueExporter;
 
