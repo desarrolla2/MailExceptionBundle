@@ -17,7 +17,7 @@
             <argument type="string">%exception_listener.subject%</argument>
         </service>
         <service id="twig.extension.value_exporter"
-                 class="Desarrolla2\Bundle\MailExceptionBundle\Twig\ValueExporterExtension" public="false">
+                 class="Desarrolla2\Bundle\MailExceptionBundle\Twig\Extension\ValueExporterExtension" public="false">
             <tag name="twig.extension" />
         </service>
     </services>
