@@ -98,4 +98,3 @@ tools:
 
     # Security Advisory Checker
     sensiolabs_security_checker: true
-
