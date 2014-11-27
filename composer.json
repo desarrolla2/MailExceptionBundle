@@ -1,6 +1,6 @@
 {
     "name": "desarrolla2/mail-exception-bundle",
-    "description": "email exceptions for symfony2",
+    "description": "Symfony bundle for reporting exceptions to an email",
     "license": "MIT",
     "authors": [
         {
