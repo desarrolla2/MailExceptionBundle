@@ -19,6 +19,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 
+/**
+ * Mailer
+ */
 class Mailer
 {
     /**
@@ -67,9 +70,9 @@ class Mailer
      * @param RequestStack     $stack
      * @param SecurityContext  $context
      * @param SessionInterface $session
-     * @param                  $from
-     * @param                  $to
-     * @param                  $subject
+     * @param string           $from
+     * @param string           $to
+     * @param string           $subject
      */
     public function __construct(
         \Swift_Mailer $mailer,
@@ -80,7 +83,8 @@ class Mailer
         $from,
         $to,
         $subject
-    ) {
+    )
+    {
         $this->mailer = $mailer;
         $this->twigEngine = $twig;
         $this->request = $stack->getCurrentRequest();
@@ -137,6 +141,9 @@ class Mailer
         return \Swift_Message::newInstance();
     }
 
+    /**
+     * @return string|void
+     */
     protected function getUser()
     {
         if (null === $token = $this->context->getToken()) {
@@ -147,6 +154,6 @@ class Mailer
             return;
         }
 
-        return $user;
+        return (string) $user;
     }
 }
