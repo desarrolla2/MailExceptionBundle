@@ -12,10 +12,34 @@ Dependencies | [![Dependency Status](https://www.versioneye.com/user/projects/54
 
 ## Installation
 
-The complete instruction for bundles installation can be found on  
-[symfony cookbook](http://symfony.com/doc/current/cookbook/bundles/installation.html)
+Download the Bundle.
 
-The package name is "desarrolla2/mail-exception-bundle".
+```bash 
+composer require knplabs/knp-menu-bundle "^2.0"
+```
+
+Enable the Bundle
+
+```php
+// app/AppKernel.php
+
+// ...
+class AppKernel extends Kernel
+{
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+
+            new  Desarrolla2\Bundle\MailExceptionBundle\MailExceptionBundle(),
+        );
+
+        // ...
+    }
+
+    // ...
+}
+```
 
 ## Usage
 
