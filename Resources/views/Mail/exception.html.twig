@@ -2,8 +2,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" bgcolor="#eeeeee">
 {% include 'MailExceptionBundle:Mail:exception.head.html.twig' %}
-<body bgcolor="#eeeeee">
-<table class="head" bgcolor="#f6f6f6">
+<body style="background: #eeeeee;">
+<table style="padding: 10px 20px; margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; background: #f6f6f6">
   <tr>
     <td><h1>{{ class }}</h1></td>
   </tr>
@@ -16,12 +16,12 @@
     <h3>Information</h3>
     <ol>
       <li>Date: {{ 'now' | date("F jS \\a\\t g:ia") }}</li>
-      <li>Path: {{ path }}</li>
+      <li>Path: <a href="{{ host }}{{ path }}"> {{ host }}{{ path }}</a></li>
       <li>User: {{ value_dump(user) }}</li>
     </ol>
   </tr>
 </table>
-<table class="body" bgcolor="#ffffff">
+<table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;">
   <tr>
     <h3>Stack Trace</h3>
     <ol>
@@ -32,7 +32,7 @@
   </tr>
 </table>
 {% if get|length %}
-  <table class="body" bgcolor="#ffffff">
+  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;">
     <tr>
       <h3>Get</h3>
       <ol>
@@ -44,7 +44,7 @@
   </table>
 {% endif %}
 {% if post|length %}
-  <table class="body" bgcolor="#ffffff">
+  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;">
     <tr>
       <h3>Post</h3>
       <ol>
@@ -56,7 +56,7 @@
   </table>
 {% endif %}
 {% if session|length %}
-  <table class="body" bgcolor="#ffffff">
+  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;">
     <tr>
       <h3>Session</h3>
       <ol>

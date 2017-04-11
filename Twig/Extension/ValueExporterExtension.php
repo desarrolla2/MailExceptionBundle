@@ -29,9 +29,9 @@ class ValueExporterExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('value_dump', array($this, 'dumpValue')),
-        );
+        return [
+            new \Twig_SimpleFunction('value_dump', [$this, 'dumpValue']),
+        ];
     }
 
     public function dumpValue($value)

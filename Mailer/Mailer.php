@@ -126,6 +126,7 @@ class Mailer
                 'message' => $exception->getMessage(),
                 'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
                 'path' => $this->request->getRequestUri(),
+                'host' => $this->request->getSchemeAndHttpHost(),
                 'user' => $this->getUser(),
                 'session' => $this->session->all(),
                 'get' => $this->request->query->all(),
