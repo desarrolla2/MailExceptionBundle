@@ -21,18 +21,16 @@
     </ol>
   </tr>
 </table>
-{% if session|length %}
-  <table class="body" bgcolor="#ffffff">
-    <tr>
-      <h3>Session</h3>
-      <ol>
-        {% for key, value in session %}
-          <li>{{ key }}: {{ value_dump(value) }}</li>
-        {% endfor %}
-      </ol>
-    </tr>
-  </table>
-{% endif %}
+<table class="body" bgcolor="#ffffff">
+  <tr>
+    <h3>Stack Trace</h3>
+    <ol>
+      {% for line in trace %}
+        <li>{{ line }}</li>
+      {% endfor %}
+    </ol>
+  </tr>
+</table>
 {% if get|length %}
   <table class="body" bgcolor="#ffffff">
     <tr>
@@ -57,16 +55,17 @@
     </tr>
   </table>
 {% endif %}
-
-<table class="body" bgcolor="#ffffff">
-  <tr>
-    <h3>Stack Trace</h3>
-    <ol>
-      {% for line in trace %}
-        <li>{{ line }}</li>
-      {% endfor %}
-    </ol>
-  </tr>
-</table>
+{% if session|length %}
+  <table class="body" bgcolor="#ffffff">
+    <tr>
+      <h3>Session</h3>
+      <ol>
+        {% for key, value in session %}
+          <li>{{ key }}: {{ value_dump(value) }}</li>
+        {% endfor %}
+      </ol>
+    </tr>
+  </table>
+{% endif %}
 </body>
 </html>

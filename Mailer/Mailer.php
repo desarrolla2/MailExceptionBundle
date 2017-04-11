@@ -17,6 +17,7 @@ use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\SecurityContext;
 
 /**
@@ -68,7 +69,7 @@ class Mailer
      * @param \Swift_Mailer    $mailer
      * @param TwigEngine       $twig
      * @param RequestStack     $stack
-     * @param SecurityContext  $context
+     * @param TokenStorage     $context
      * @param SessionInterface $session
      * @param string           $from
      * @param string           $to
@@ -78,13 +79,12 @@ class Mailer
         \Swift_Mailer $mailer,
         TwigEngine $twig,
         RequestStack $stack,
-        SecurityContext $context,
+        TokenStorage $context,
         SessionInterface $session,
         $from,
         $to,
         $subject
-    )
-    {
+    ) {
         $this->mailer = $mailer;
         $this->twigEngine = $twig;
         $this->request = $stack->getCurrentRequest();
@@ -102,10 +102,11 @@ class Mailer
      */
     public function notify(\Exception $exception)
     {
-        $message = $this->createMessage()
-            ->setSubject($this->subject.'('.$exception->getMessage().')')
+        $message = $this
+            ->createMessage()
             ->setFrom($this->from)
             ->setTo($this->to)
+            ->setSubject(sprintf('%s [%s]', $this->subject, $exception->getMessage()))
             ->setBody($this->getBody($exception), 'text/html');
 
         return $this->mailer->send($message);
@@ -154,6 +155,6 @@ class Mailer
             return;
         }
 
-        return (string) $user;
+        return (string)$user;
     }
 }

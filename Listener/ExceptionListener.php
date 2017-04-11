@@ -68,7 +68,7 @@ class ExceptionListener implements EventSubscriberInterface
             return;
         }
 
-        $this->mailer->notify($exception);
+        dump($this->mailer->notify($exception));
     }
 
     /**

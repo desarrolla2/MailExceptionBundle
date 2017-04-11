@@ -10,7 +10,7 @@
             <argument type="service" id="mailer"/>
             <argument type="service" id="templating"/>
             <argument type="service" id="request_stack"/>
-            <argument type="service" id="security.context"/>
+            <argument type="service" id="security.token_storage"/>
             <argument type="service" id="session"/>
             <argument type="string">%exception_listener.from%</argument>
             <argument type="string">%exception_listener.to%</argument>
