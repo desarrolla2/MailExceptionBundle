@@ -13,8 +13,8 @@
 
 namespace Desarrolla2\Bundle\MailExceptionBundle\Listener;
 
-use \Exception;
 use Desarrolla2\Bundle\MailExceptionBundle\Mailer\Mailer;
+use Exception;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
@@ -68,7 +68,7 @@ class ExceptionListener implements EventSubscriberInterface
             return;
         }
 
-        dump($this->mailer->notify($exception));
+        return $this->mailer->notify($exception);
     }
 
     /**
