@@ -1,19 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" bgcolor="#eeeeee">
-{% include 'MailExceptionBundle:Mail:exception.head.html.twig' %}
-<body style="background: #eeeeee;">
-<table style="padding: 10px 20px; margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; background: #f6f6f6">
+<html xmlns="http://www.w3.org/1999/xhtml" bgcolor="#f6f6f6">
+<body style="background: #f6f6f6; padding-top: 20px">
+<table style="padding: 10px 20px; margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;
+ width: 90%; background: #fff;">
   <tr>
-    <td><h1>{{ class }}</h1></td>
-  </tr>
-  <tr>
-    <td><h2>{{ message }}</h2></td>
+    <td>
+      <img
+          src="data:image/png;base64,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"
+          alt=""/>
+    </td>
+    <td><h1>{{ class }}: {{ message }}</h1></td>
   </tr>
 </table>
-<table class="body" bgcolor="#ffffff">
+<table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
+ background: #fff;">
   <tr>
-    <h3>Information</h3>
+    <h2>Information</h2>
+    <hr/>
     <ol>
       <li>Date: {{ 'now' | date("F jS \\a\\t g:ia") }}</li>
       <li>Path: <a href="{{ host }}{{ path }}"> {{ host }}{{ path }}</a></li>
@@ -21,9 +25,11 @@
     </ol>
   </tr>
 </table>
-<table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;">
+<table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
+ background: #fff;">
   <tr>
-    <h3>Stack Trace</h3>
+    <h2>Stack Trace</h2>
+    <hr/>
     <ol>
       {% for line in trace %}
         <li>{{ line }}</li>
@@ -32,9 +38,11 @@
   </tr>
 </table>
 {% if get|length %}
-  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;">
+  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
+ background: #fff;">
     <tr>
-      <h3>Get</h3>
+      <h2>Get</h2>
+      <hr/>
       <ol>
         {% for key, value in get %}
           <li>{{ key }}: {{ value_dump(value) }}</li>
@@ -44,9 +52,11 @@
   </table>
 {% endif %}
 {% if post|length %}
-  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;">
+  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
+ background: #fff;">
     <tr>
-      <h3>Post</h3>
+      <h2>Post</h2>
+      <hr/>
       <ol>
         {% for key, value in post %}
           <li>{{ key }}: {{ value_dump(value) }}</li>
@@ -56,9 +66,11 @@
   </table>
 {% endif %}
 {% if session|length %}
-  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;">
+  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
+ background: #fff;">
     <tr>
-      <h3>Session</h3>
+      <h2>Session</h2>
+      <hr/>
       <ol>
         {% for key, value in session %}
           <li>{{ key }}: {{ value_dump(value) }}</li>
