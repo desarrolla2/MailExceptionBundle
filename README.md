@@ -15,7 +15,7 @@ Dependencies | [![Dependency Status](https://www.versioneye.com/user/projects/54
 Download the Bundle.
 
 ```bash 
-composer require knplabs/knp-menu-bundle "^2.0"
+composer require "desarrolla2/mail-exception-bundle"
 ```
 
 Enable the Bundle
