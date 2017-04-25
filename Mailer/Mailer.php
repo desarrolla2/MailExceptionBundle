@@ -119,6 +119,11 @@ class Mailer
      */
     protected function getBody(\Exception $exception)
     {
+        $session = $this->session->all();
+        if (array_key_exists('_security_main', $session)) {
+            unset($session['_security_main']);
+        }
+
         return $this->twigEngine->render(
             'MailExceptionBundle:Mail:exception.html.twig',
             [
