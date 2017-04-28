@@ -126,37 +126,27 @@ class Mailer
             unset($session['_security_main']);
         }
 
-        if (!$this->request) {
-            return $this->twigEngine->render(
-                'MailExceptionBundle:Mail:exception.html.twig',
+        $parameters = [
+            'class' => get_class($exception),
+            'message' => $exception->getMessage(),
+            'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
+            'user' => $this->getUser(),
+        ];
+
+        if ($this->request) {
+            $parameters = array_merge(
+                $parameters,
                 [
-                    'class' => get_class($exception),
-                    'message' => $exception->getMessage(),
-                    'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
-                    'user' => $this->getUser(),
-                    'path' => false,
-                    'host' => false,
-                    'session' => false,
-                    'get' => false,
-                    'post' => false,
+                    'path' => $this->request ? $this->request->getRequestUri() : '',
+                    'host' => $this->request ? $this->request->getSchemeAndHttpHost() : '',
+                    'session' => $this->session->all(),
+                    'get' => $this->request->query->all(),
+                    'post' => $this->request->request->all(),
                 ]
             );
         }
 
-        return $this->twigEngine->render(
-            'MailExceptionBundle:Mail:exception.html.twig',
-            [
-                'class' => get_class($exception),
-                'message' => $exception->getMessage(),
-                'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
-                'path' => $this->request ? $this->request->getRequestUri() : '',
-                'host' => $this->request ? $this->request->getSchemeAndHttpHost() : '',
-                'user' => $this->getUser(),
-                'session' => $this->session->all(),
-                'get' => $this->request->query->all(),
-                'post' => $this->request->request->all(),
-            ]
-        );
+        return $this->twigEngine->render('MailExceptionBundle:Mail:exception.html.twig', $parameters);
     }
 
     /**
