@@ -1,20 +1,21 @@
 {
-    "name": "desarrolla2/mail-exception-bundle",
-    "description": "Symfony bundle for reporting exceptions to an email",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Daniel González Cerviño",
-            "email": "daniel@desarrolla2.com"
-        }
-    ],
-    "require": {
-        "symfony/framework-bundle": "~3.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Desarrolla2\\Bundle\\MailExceptionBundle\\": ""
-        }
-    },
-    "minimum-stability": "dev"
+  "name": "desarrolla2/mail-exception-bundle",
+  "description": "Symfony bundle for reporting exceptions to an email",
+  "license": "MIT",
+  "type": "symfony-bundle",
+  "authors": [
+    {
+      "name": "Daniel González Cerviño",
+      "email": "daniel@desarrolla2.com"
+    }
+  ],
+  "require": {
+    "symfony/framework-bundle": "~3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Desarrolla2\\Bundle\\MailExceptionBundle\\": ""
+    }
+  },
+  "minimum-stability": "dev"
 }

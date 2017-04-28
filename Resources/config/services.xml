@@ -6,7 +6,7 @@
 
     <services>
         <service id="desarrolla2.exception_listener.mailer"
-                 class="Desarrolla2\Bundle\MailExceptionBundle\Mailer\Mailer" public="false">
+                 class="Desarrolla2\Bundle\MailExceptionBundle\Mailer\Mailer" public="true">
             <argument type="service" id="mailer"/>
             <argument type="service" id="templating"/>
             <argument type="service" id="request_stack"/>
