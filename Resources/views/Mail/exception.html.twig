@@ -71,9 +71,11 @@
       <h2>Session</h2>
       <hr/>
       <ol>
-        {% for key, value in session %}
-          <li>{{ key }}: {{ value_dump(value) }}</li>
-        {% endfor %}
+        {% if key != '_security_main' %}
+          {% for key, value in session %}
+            <li>{{ key }}: {{ value_dump(value) }}</li>
+          {% endfor %}
+        {% endif %}
       </ol>
     </tr>
   </table>
