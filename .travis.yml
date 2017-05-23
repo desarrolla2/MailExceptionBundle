@@ -9,7 +9,7 @@ php:
 
 matrix:
   allow_failures:
-    - php: hhvm
+    - php: hhvm, 7.0, 7.1
 
 notifications:
   email:
