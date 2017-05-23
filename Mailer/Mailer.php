@@ -139,9 +139,9 @@ class Mailer
                 [
                     'path' => $this->request ? $this->request->getRequestUri() : '',
                     'host' => $this->request ? $this->request->getSchemeAndHttpHost() : '',
-                    'session' => $this->session->all(),
-                    'get' => $this->request->query->all(),
-                    'post' => $this->request->request->all(),
+                    'session' => ksort($this->session->all()),
+                    'get' => ksort($this->request->query->all()),
+                    'post' => ksort($this->request->request->all()),
                 ]
             );
         }
