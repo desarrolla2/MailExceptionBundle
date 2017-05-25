@@ -104,6 +104,8 @@ class Mailer
      */
     public function notify(\Exception $exception)
     {
+        echo $this->getBody($exception);
+        die();
         $message = $this
             ->createMessage()
             ->setFrom($this->from)
@@ -121,32 +123,48 @@ class Mailer
      */
     protected function getBody(\Exception $exception)
     {
-        $session = $this->session->all();
-        if (array_key_exists('_security_main', $session)) {
-            unset($session['_security_main']);
-        }
-
-        $parameters = [
-            'class' => get_class($exception),
-            'message' => $exception->getMessage(),
-            'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
-            'user' => $this->getUser(),
-        ];
-
-        if ($this->request) {
-            $parameters = array_merge(
-                $parameters,
+        if (!$this->request) {
+            return $this->twigEngine->render(
+                'MailExceptionBundle:Mail:exception.html.twig',
                 [
-                    'path' => $this->request ? $this->request->getRequestUri() : '',
-                    'host' => $this->request ? $this->request->getSchemeAndHttpHost() : '',
-                    'session' => $this->session->all(),
-                    'get' => $this->request->query->all(),
-                    'post' => $this->request->request->all(),
+                    'class' => get_class($exception),
+                    'message' => $exception->getMessage(),
+                    'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
+                    'user' => $this->getUser(),
+                    'path' => false,
+                    'host' => false,
+                    'session' => false,
+                    'get' => false,
+                    'post' => false,
                 ]
             );
         }
 
-        return $this->twigEngine->render('MailExceptionBundle:Mail:exception.html.twig', $parameters);
+        $session = $this->session->all();
+        if (array_key_exists('_security_main', $session)) {
+            unset($session['_security_main']);
+        }
+        $get = $this->request->query->all();
+        $post = $this->request->request->all();
+
+        ksort($session);
+        ksort($get);
+        ksort($post);
+
+        return $this->twigEngine->render(
+            'MailExceptionBundle:Mail:exception.html.twig',
+            [
+                'class' => get_class($exception),
+                'message' => $exception->getMessage(),
+                'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
+                'path' => $this->request ? $this->request->getRequestUri() : '',
+                'host' => $this->request ? $this->request->getSchemeAndHttpHost() : '',
+                'user' => $this->getUser(),
+                'session' => $session,
+                'get' => $get,
+                'post' => $post,
+            ]
+        );
     }
 
     /**

@@ -11,42 +11,34 @@
 <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
  background: #fff;">
   <tr>
-    <h2>Information</h2>
-    <hr/>
-    <ol>
-      <li>Date: {{ 'now' | date("F jS \\a\\t g:ia") }}</li>
-      {% if host and path %}
-        <li>Path: <a href="{{ host }}{{ path }}"> {{ host }}{{ path }}</a></li>
-      {% endif %}
-      {% if user %}
-        <li>User: {{ value_dump(user) }}</li>
-      {% endif %}
-    </ol>
-  </tr>
-</table>
-<table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
- background: #fff;">
-  <tr>
-    <h2>Stack Trace</h2>
-    <hr/>
-    <ol>
-      {% for line in trace %}
-        <li>{{ line }}</li>
-      {% endfor %}
-    </ol>
+    <td>
+      <h2>Information</h2>
+      <hr/>
+      <ol>
+        <li>Date: {{ 'now' | date("F jS \\a\\t g:ia") }}</li>
+        {% if host and path %}
+          <li>Path: <a href="{{ host }}{{ path }}"> {{ host }}{{ path }}</a></li>
+        {% endif %}
+        {% if user %}
+          <li>User: {{ value_dump(user) }}</li>
+        {% endif %}
+      </ol>
+    </td>
   </tr>
 </table>
 {% if get|length %}
   <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
  background: #fff;">
     <tr>
-      <h2>Get</h2>
-      <hr/>
-      <ol>
-        {% for key, value in get %}
-          <li>{{ key }}: {{ value_dump(value) }}</li>
-        {% endfor %}
-      </ol>
+      <td>
+        <h2>Get</h2>
+        <hr/>
+        <ol>
+          {% for key, value in get %}
+            <li>{{ key }}: {{ value_dump(value) }}</li>
+          {% endfor %}
+        </ol>
+      </td>
     </tr>
   </table>
 {% endif %}
@@ -54,13 +46,15 @@
   <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
  background: #fff;">
     <tr>
-      <h2>Post</h2>
-      <hr/>
-      <ol>
-        {% for key, value in post %}
-          <li>{{ key }}: {{ value_dump(value) }}</li>
-        {% endfor %}
-      </ol>
+      <td>
+        <h2>Post</h2>
+        <hr/>
+        <ol>
+          {% for key, value in post %}
+            <li>{{ key }}: {{ value_dump(value) }}</li>
+          {% endfor %}
+        </ol>
+      </td>
     </tr>
   </table>
 {% endif %}
@@ -68,17 +62,31 @@
   <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
  background: #fff;">
     <tr>
-      <h2>Session</h2>
-      <hr/>
-      <ol>
-        {% if key != '_security_main' %}
+      <td>
+        <h2>Session</h2>
+        <hr/>
+        <ol>
           {% for key, value in session %}
             <li>{{ key }}: {{ value_dump(value) }}</li>
           {% endfor %}
-        {% endif %}
-      </ol>
+        </ol>
+      </td>
     </tr>
   </table>
 {% endif %}
+<table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
+ background: #fff;">
+  <tr>
+    <td>
+      <h2>Stack Trace</h2>
+      <hr/>
+      <ol>
+        {% for line in trace %}
+          <li>{{ line }}</li>
+        {% endfor %}
+      </ol>
+    </td>
+  </tr>
+</table>
 </body>
 </html>
