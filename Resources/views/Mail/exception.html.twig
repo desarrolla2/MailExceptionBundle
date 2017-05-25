@@ -22,6 +22,12 @@
         {% if user %}
           <li>User: {{ value_dump(user) }}</li>
         {% endif %}
+        {% if file %}
+          <li>File: {{ value_dump(user) }}</li>
+        {% endif %}
+        {% if line %}
+          <li>Line: {{ value_dump(user) }}</li>
+        {% endif %}
       </ol>
     </td>
   </tr>

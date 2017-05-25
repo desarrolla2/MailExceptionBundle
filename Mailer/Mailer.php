@@ -127,6 +127,8 @@ class Mailer
                 [
                     'class' => get_class($exception),
                     'message' => $exception->getMessage(),
+                    'file' => $exception->getFile(),
+                    'line' => $exception->getLine(),
                     'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
                     'user' => $this->getUser(),
                     'path' => false,
