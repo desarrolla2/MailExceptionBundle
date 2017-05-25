@@ -58,7 +58,9 @@ class ExceptionListener implements EventSubscriberInterface
     }
 
     /**
-     * @param GetResponseForExceptionEvent $event
+     * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
+     *
+     * @return int|void
      */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
