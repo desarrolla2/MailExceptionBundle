@@ -104,8 +104,6 @@ class Mailer
      */
     public function notify(\Exception $exception)
     {
-        echo $this->getBody($exception);
-        die();
         $message = $this
             ->createMessage()
             ->setFrom($this->from)
