@@ -187,6 +187,9 @@ class Mailer
         if (!is_object($user = $token->getUser())) {
             return;
         }
+        if (method_exists($user, 'getId') && method_exists($user, 'getEmail') && method_exists($user, 'getName')) {
+            return sprintf('[%d] %s <%s>', $user->getId(), $user->getName(), $user->getEmail());
+        }
 
         return (string)$user;
     }
