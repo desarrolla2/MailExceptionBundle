@@ -32,6 +32,22 @@
     </td>
   </tr>
 </table>
+{% if extra|length %}
+  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
+ background: #fff;">
+    <tr>
+      <td>
+        <h2>Extra</h2>
+        <hr/>
+        <ol>
+          {% for key, value in extra %}
+            <li>{{ key }}: {{ value_dump(value) }}</li>
+          {% endfor %}
+        </ol>
+      </td>
+    </tr>
+  </table>
+{% endif %}
 {% if get|length %}
   <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
  background: #fff;">

@@ -99,45 +99,49 @@ class Mailer
 
     /**
      * @param \Exception $exception
+     * @param array      $extra
      *
      * @return int
      */
-    public function notify(\Exception $exception)
+    public function notify(\Exception $exception, array $extra = [])
     {
         $message = $this
             ->createMessage()
             ->setFrom($this->from)
             ->setTo($this->to)
             ->setSubject(sprintf('%s [%s]', $this->subject, $exception->getMessage()))
-            ->setBody($this->getBody($exception), 'text/html');
+            ->setBody($this->getBody($exception, $extra), 'text/html');
 
         return $this->mailer->send($message);
     }
 
     /**
-     * @param  \Exception $exception
+     * @param \Exception $exception
+     * @param array      $extra
      *
      * @return string
      */
-    protected function getBody(\Exception $exception)
+    protected function getBody(\Exception $exception, array $extra = [])
     {
+        if (!count($extra)) {
+            $extra = false;
+        }
+        $parameters = [
+            'class' => get_class($exception),
+            'message' => $exception->getMessage(),
+            'file' => $exception->getFile(),
+            'line' => $exception->getLine(),
+            'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
+            'extra' => $extra,
+            'user' => false,
+            'path' => false,
+            'host' => false,
+            'session' => false,
+            'get' => false,
+            'post' => false,
+        ];
         if (!$this->request) {
-            return $this->twigEngine->render(
-                'MailExceptionBundle:Mail:exception.html.twig',
-                [
-                    'class' => get_class($exception),
-                    'message' => $exception->getMessage(),
-                    'file' => $exception->getFile(),
-                    'line' => $exception->getLine(),
-                    'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
-                    'user' => $this->getUser(),
-                    'path' => false,
-                    'host' => false,
-                    'session' => false,
-                    'get' => false,
-                    'post' => false,
-                ]
-            );
+            return $this->twigEngine->render('MailExceptionBundle:Mail:exception.html.twig', $parameters);
         }
 
         $session = $this->session->all();
@@ -153,17 +157,17 @@ class Mailer
 
         return $this->twigEngine->render(
             'MailExceptionBundle:Mail:exception.html.twig',
-            [
-                'class' => get_class($exception),
-                'message' => $exception->getMessage(),
-                'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
-                'path' => $this->request ? $this->request->getRequestUri() : '',
-                'host' => $this->request ? $this->request->getSchemeAndHttpHost() : '',
-                'user' => $this->getUser(),
-                'session' => $session,
-                'get' => $get,
-                'post' => $post,
-            ]
+            array_merge(
+                $parameters,
+                [
+                    'path' => $this->request ? $this->request->getRequestUri() : '',
+                    'host' => $this->request ? $this->request->getSchemeAndHttpHost() : '',
+                    'user' => $this->getUser(),
+                    'session' => $session,
+                    'get' => $get,
+                    'post' => $post,
+                ]
+            )
         );
     }
 
