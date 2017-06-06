@@ -20,13 +20,13 @@
           <li>Path: <a href="{{ host }}{{ path }}"> {{ host }}{{ path }}</a></li>
         {% endif %}
         {% if user %}
-          <li>User: {{ value_dump(user) }}</li>
+          <li>User: {{ dump(user) }}</li>
         {% endif %}
         {% if file %}
-          <li>File: {{ value_dump(file) }}</li>
+          <li>File: {{ dump(file) }}</li>
         {% endif %}
         {% if line %}
-          <li>Line: {{ value_dump(line) }}</li>
+          <li>Line: {{ dump(line) }}</li>
         {% endif %}
       </ol>
     </td>
@@ -41,7 +41,7 @@
         <hr/>
         <ol>
           {% for key, value in extra %}
-            <li>{{ key }}: {{ value_dump(value) }}</li>
+            <li>{{ key }}: {{ dump(value) }}</li>
           {% endfor %}
         </ol>
       </td>
@@ -57,7 +57,7 @@
         <hr/>
         <ol>
           {% for key, value in get %}
-            <li>{{ key }}: {{ value_dump(value) }}</li>
+            <li>{{ key }}: {{ dump(value) }}</li>
           {% endfor %}
         </ol>
       </td>
@@ -73,7 +73,7 @@
         <hr/>
         <ol>
           {% for key, value in post %}
-            <li>{{ key }}: {{ value_dump(value) }}</li>
+            <li>{{ key }}: {{ dump(value) }}</li>
           {% endfor %}
         </ol>
       </td>
@@ -89,7 +89,7 @@
         <hr/>
         <ol>
           {% for key, value in session %}
-            <li>{{ key }}: {{ value_dump(value) }}</li>
+            <li>{{ key }}: {{ dump(value) }}</li>
           {% endfor %}
         </ol>
       </td>

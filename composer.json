@@ -10,7 +10,8 @@
     }
   ],
   "require": {
-    "symfony/framework-bundle": "~3.0"
+    "symfony/framework-bundle": "~3.0",
+    "symfony/var-dumper": "3.4.x-dev"
   },
   "autoload": {
     "psr-4": {
