@@ -126,6 +126,10 @@ class Mailer
         if (!count($extra)) {
             $extra = false;
         }
+
+        $headers = $this->request->headers->all();
+        ksort($headers);
+
         $parameters = [
             'class' => get_class($exception),
             'message' => $exception->getMessage(),
@@ -136,10 +140,12 @@ class Mailer
             'user' => false,
             'path' => false,
             'host' => false,
+            'headers' => $headers,
             'session' => false,
             'get' => false,
             'post' => false,
         ];
+
         if (!$this->request) {
             return $this->twigEngine->render('MailExceptionBundle:Mail:exception.html.twig', $parameters);
         }

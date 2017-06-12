@@ -20,13 +20,13 @@
           <li>Path: <a href="{{ host }}{{ path }}"> {{ host }}{{ path }}</a></li>
         {% endif %}
         {% if user %}
-          <li>User: {{ dump(user) }}</li>
+          <li>User: {{ user }}</li>
         {% endif %}
         {% if file %}
-          <li>File: {{ dump(file) }}</li>
+          <li>File: {{ file }}</li>
         {% endif %}
         {% if line %}
-          <li>Line: {{ dump(line) }}</li>
+          <li>Line: {{ line }}</li>
         {% endif %}
       </ol>
     </td>
@@ -89,6 +89,22 @@
         <hr/>
         <ol>
           {% for key, value in session %}
+            <li>{{ key }}: {{ dump(value) }}</li>
+          {% endfor %}
+        </ol>
+      </td>
+    </tr>
+  </table>
+{% endif %}
+{% if headers|length %}
+  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
+ background: #fff;">
+    <tr>
+      <td>
+        <h2>Headers</h2>
+        <hr/>
+        <ol>
+          {% for key, value in headers %}
             <li>{{ key }}: {{ dump(value) }}</li>
           {% endfor %}
         </ol>
