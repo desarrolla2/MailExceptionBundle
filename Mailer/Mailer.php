@@ -135,6 +135,7 @@ class Mailer
             'message' => $exception->getMessage(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
+            'ip' => $this->request->getClientIp(),
             'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
             'extra' => $extra,
             'user' => false,

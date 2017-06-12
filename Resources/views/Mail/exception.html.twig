@@ -19,6 +19,7 @@
         {% if host and path %}
           <li>Path: <a href="{{ host }}{{ path }}"> {{ host }}{{ path }}</a></li>
         {% endif %}
+        <li>Client ip: {{ ip }}</li>
         {% if user %}
           <li>User: {{ user }}</li>
         {% endif %}
