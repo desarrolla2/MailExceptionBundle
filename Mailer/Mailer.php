@@ -131,10 +131,12 @@ class Mailer
             unset($session['_security_main']);
         }
         $headers = $get = $post = [];
-        if ($this->request->headers) {
-            $headers = $this->request->headers->all();
-            $get = $this->request->query ? $this->request->query->all() : [];
-            $post = $this->request->request ? $this->request->request->all() : [];
+        if ($this->request) {
+            if ($this->request->headers) {
+                $headers = $this->request->headers->all();
+                $get = $this->request->query ? $this->request->query->all() : [];
+                $post = $this->request->request ? $this->request->request->all() : [];
+            }
         }
         ksort($headers);
         ksort($session);
