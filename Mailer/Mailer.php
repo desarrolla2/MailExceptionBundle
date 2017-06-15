@@ -127,8 +127,11 @@ class Mailer
             $extra = false;
         }
 
-        $headers = $this->request->headers->all();
-        ksort($headers);
+        $headers = false;
+        if ($this->request->headers) {
+            $headers = $this->request->headers->all();
+            ksort($headers);
+        }
 
         $parameters = [
             'class' => get_class($exception),
