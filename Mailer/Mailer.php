@@ -126,19 +126,27 @@ class Mailer
         if (!count($extra)) {
             $extra = false;
         }
-
-        $headers = false;
+        $session = $this->session ? $this->session->all() : [];
+        if (array_key_exists('_security_main', $session)) {
+            unset($session['_security_main']);
+        }
+        $headers = $get = $post = [];
         if ($this->request->headers) {
             $headers = $this->request->headers->all();
-            ksort($headers);
+            $get = $this->request->query ? $this->request->query->all() : [];
+            $post = $this->request->request ? $this->request->request->all() : [];
         }
+        ksort($headers);
+        ksort($session);
+        ksort($get);
+        ksort($post);
 
         $parameters = [
             'class' => get_class($exception),
             'message' => $exception->getMessage(),
             'file' => $exception->getFile(),
             'line' => $exception->getLine(),
-            'ip' => $this->request->getClientIp(),
+            'ip' => $this->request ? $this->request->getClientIp() : false,
             'trace' => preg_split('/\r\n|\r|\n/', $exception->getTraceAsString()),
             'extra' => $extra,
             'user' => false,
@@ -154,16 +162,6 @@ class Mailer
             return $this->twigEngine->render('MailExceptionBundle:Mail:exception.html.twig', $parameters);
         }
 
-        $session = $this->session->all();
-        if (array_key_exists('_security_main', $session)) {
-            unset($session['_security_main']);
-        }
-        $get = $this->request->query->all();
-        $post = $this->request->request->all();
-
-        ksort($session);
-        ksort($get);
-        ksort($post);
 
         return $this->twigEngine->render(
             'MailExceptionBundle:Mail:exception.html.twig',
