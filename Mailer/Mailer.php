@@ -43,7 +43,7 @@ class Mailer
     /**
      * @var SecurityContext
      */
-    protected $context;
+    protected $tokenStorage;
 
     /**
      * @var SessionInterface
@@ -79,7 +79,7 @@ class Mailer
         \Swift_Mailer $mailer,
         TwigEngine $twig,
         RequestStack $stack,
-        TokenStorage $context,
+        TokenStorage $context = null,
         SessionInterface $session,
         $from,
         $to,
@@ -194,6 +194,9 @@ class Mailer
      */
     protected function getUser()
     {
+        if (!$this->tokenStorage) {
+            return;
+        }
         if (null === $token = $this->context->getToken()) {
             return;
         }
