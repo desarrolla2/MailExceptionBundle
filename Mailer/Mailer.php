@@ -66,40 +66,44 @@ class Mailer
     protected $subject;
 
     /**
-     * @param \Swift_Mailer    $mailer
-     * @param TwigEngine       $twig
-     * @param RequestStack     $stack
-     * @param TokenStorage     $context
+     * Mailer constructor.
+     * @param \Swift_Mailer $mailer
+     * @param TwigEngine $twig
+     * @param RequestStack $stack
+     * @param TokenStorage|null $tokenStorage
      * @param SessionInterface $session
-     * @param string           $from
-     * @param string           $to
-     * @param string           $subject
+     * @param $from
+     * @param $to
+     * @param $subject
      */
     public function __construct(
         \Swift_Mailer $mailer,
         TwigEngine $twig,
         RequestStack $stack,
-        TokenStorage $context = null,
+        TokenStorage $tokenStorage = null,
         SessionInterface $session,
         $from,
         $to,
         $subject
     ) {
+
         if ($stack) {
             $this->request = $stack->getCurrentRequest();
         }
         $this->mailer = $mailer;
         $this->twigEngine = $twig;
-        $this->context = $context;
+        $this->tokenStorage = $tokenStorage;
         $this->session = $session;
         $this->from = $from;
         $this->to = $to;
         $this->subject = $subject;
+
+        ldd($this->getUser());
     }
 
     /**
      * @param \Exception $exception
-     * @param array      $extra
+     * @param array $extra
      *
      * @return int
      */
@@ -116,8 +120,16 @@ class Mailer
     }
 
     /**
+     * @return \Swift_Mime_SimpleMessage
+     */
+    protected function createMessage()
+    {
+        return \Swift_Message::newInstance();
+    }
+
+    /**
      * @param \Exception $exception
-     * @param array      $extra
+     * @param array $extra
      *
      * @return string
      */
@@ -182,14 +194,6 @@ class Mailer
     }
 
     /**
-     * @return \Swift_Mime_SimpleMessage
-     */
-    protected function createMessage()
-    {
-        return \Swift_Message::newInstance();
-    }
-
-    /**
      * @return string|void
      */
     protected function getUser()
@@ -197,13 +201,14 @@ class Mailer
         if (!$this->tokenStorage) {
             return;
         }
-        if (null === $token = $this->context->getToken()) {
+        if (null === $token = $this->tokenStorage->getToken()) {
             return;
         }
 
         if (!is_object($user = $token->getUser())) {
             return;
         }
+        
         if (method_exists($user, 'getId') && method_exists($user, 'getEmail') && method_exists($user, 'getName')) {
             return sprintf('[%d] %s <%s>', $user->getId(), $user->getName(), $user->getEmail());
         }
