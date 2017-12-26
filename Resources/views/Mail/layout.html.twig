@@ -9,7 +9,6 @@
     body {
       margin: 0;
       padding: 20px 0;
-      background: #f6f6f6;
     }
 
     h1, h2, ol, li {
@@ -23,7 +22,6 @@
       border-radius: 5px;
       border: 1px solid #adadad;
       width: 90%;
-      background: #fff;
     }
 
     table h2 {
@@ -34,9 +32,9 @@
 
   </style>
 </head>
-<body>
+<body style="background: #f6f6f6;">
 {% block body %}
-  <table>
+  <table style="background: #fff;">
     <tr>
       <td>
         {% block content %}{% endblock %}
