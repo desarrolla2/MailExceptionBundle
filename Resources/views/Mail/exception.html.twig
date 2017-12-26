@@ -1,6 +1,6 @@
 {% extends '@MailException/Mail/layout.html.twig' %}
 {% block body %}
-  <table style="">
+  <table>
     <tr>
       <td><h1>{{ class }}: {{ message }}</h1></td>
     </tr>
@@ -8,7 +8,7 @@
   <table>
     <tr>
       <td>
-        <h2>Information</h2>
+        <h2>{{ 'information'|trans|capitalize }}</h2>
         <ol>
           <li>Date: {{ 'now' | date("F jS \\a\\t g:ia") }}</li>
           {% if host and path %}
@@ -32,7 +32,7 @@
     <table>
       <tr>
         <td>
-          <h2>Extra</h2>
+          <h2>{{ 'extra information'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in extra %}
               <li>{{ key }}: {{ dump(value) }}</li>
@@ -46,7 +46,7 @@
     <table>
       <tr>
         <td>
-          <h2>Get</h2>
+          <h2>{{ 'get parameters'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in get %}
               <li>{{ key }}: {{ dump(value) }}</li>
@@ -60,7 +60,7 @@
     <table>
       <tr>
         <td>
-          <h2>Post</h2>
+          <h2>{{ 'post parameters'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in post %}
               <li>{{ key }}: {{ dump(value) }}</li>
@@ -74,7 +74,7 @@
     <table>
       <tr>
         <td>
-          <h2>Session</h2>
+          <h2>{{ 'session'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in session %}
               <li>{{ key }}: {{ dump(value) }}</li>
@@ -88,7 +88,7 @@
     <table>
       <tr>
         <td>
-          <h2>Headers</h2>
+          <h2>{{ 'header'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in headers %}
               <li>{{ key }}: {{ dump(value) }}</li>
@@ -101,7 +101,7 @@
   <table>
     <tr>
       <td>
-        <h2>Stack Trace</h2>
+        <h2>{{ 'stack trace'|trans|capitalize }}</h2>
         <ol>
           {% for line in trace %}
             <li>{{ line }}</li>
