@@ -1,131 +1,113 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" bgcolor="#f6f6f6">
-<body style="background: #f6f6f6; padding-top: 20px">
-<table style="padding: 10px 20px; margin: 10px auto; border-radius: 5px; border: 1px solid #adadad;
- width: 90%; background: #fff;">
-  <tr>
-    <td><h1>{{ class }}: {{ message }}</h1></td>
-  </tr>
-</table>
-<table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
- background: #fff;">
-  <tr>
-    <td>
-      <h2>Information</h2>
-      <hr/>
-      <ol>
-        <li>Date: {{ 'now' | date("F jS \\a\\t g:ia") }}</li>
-        {% if host and path %}
-          <li>Path: <a href="{{ host }}{{ path }}"> {{ host }}{{ path }}</a></li>
-        {% endif %}
-        <li>Client ip: {{ ip }}</li>
-        {% if user %}
-          <li>User: {{ user }}</li>
-        {% endif %}
-        {% if file %}
-          <li>File: {{ file }}</li>
-        {% endif %}
-        {% if line %}
-          <li>Line: {{ line }}</li>
-        {% endif %}
-      </ol>
-    </td>
-  </tr>
-</table>
-{% if extra|length %}
-  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
- background: #fff;">
+{% extends '@App/Mail/layout.html.twig' %}
+{% block body %}
+  <table style="">
+    <tr>
+      <td><h1>{{ class }}: {{ message }}</h1></td>
+    </tr>
+  </table>
+  <table>
     <tr>
       <td>
-        <h2>Extra</h2>
-        <hr/>
+        <h2>Information</h2>
         <ol>
-          {% for key, value in extra %}
-            <li>{{ key }}: {{ dump(value) }}</li>
+          <li>Date: {{ 'now' | date("F jS \\a\\t g:ia") }}</li>
+          {% if host and path %}
+            <li>Path: <a href="{{ host }}{{ path }}"> {{ host }}{{ path }}</a></li>
+          {% endif %}
+          <li>Client ip: {{ ip }}</li>
+          {% if user %}
+            <li>User: {{ user }}</li>
+          {% endif %}
+          {% if file %}
+            <li>File: {{ file }}</li>
+          {% endif %}
+          {% if line %}
+            <li>Line: {{ line }}</li>
+          {% endif %}
+        </ol>
+      </td>
+    </tr>
+  </table>
+  {% if extra|length %}
+    <table>
+      <tr>
+        <td>
+          <h2>Extra</h2>
+          <ol>
+            {% for key, value in extra %}
+              <li>{{ key }}: {{ dump(value) }}</li>
+            {% endfor %}
+          </ol>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+  {% if get|length %}
+    <table>
+      <tr>
+        <td>
+          <h2>Get</h2>
+          <ol>
+            {% for key, value in get %}
+              <li>{{ key }}: {{ dump(value) }}</li>
+            {% endfor %}
+          </ol>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+  {% if post|length %}
+    <table>
+      <tr>
+        <td>
+          <h2>Post</h2>
+          <ol>
+            {% for key, value in post %}
+              <li>{{ key }}: {{ dump(value) }}</li>
+            {% endfor %}
+          </ol>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+  {% if session|length %}
+    <table>
+      <tr>
+        <td>
+          <h2>Session</h2>
+          <ol>
+            {% for key, value in session %}
+              <li>{{ key }}: {{ dump(value) }}</li>
+            {% endfor %}
+          </ol>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+  {% if headers|length %}
+    <table>
+      <tr>
+        <td>
+          <h2>Headers</h2>
+          <ol>
+            {% for key, value in headers %}
+              <li>{{ key }}: {{ dump(value) }}</li>
+            {% endfor %}
+          </ol>
+        </td>
+      </tr>
+    </table>
+  {% endif %}
+  <table>
+    <tr>
+      <td>
+        <h2>Stack Trace</h2>
+        <ol>
+          {% for line in trace %}
+            <li>{{ line }}</li>
           {% endfor %}
         </ol>
       </td>
     </tr>
   </table>
-{% endif %}
-{% if get|length %}
-  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
- background: #fff;">
-    <tr>
-      <td>
-        <h2>Get</h2>
-        <hr/>
-        <ol>
-          {% for key, value in get %}
-            <li>{{ key }}: {{ dump(value) }}</li>
-          {% endfor %}
-        </ol>
-      </td>
-    </tr>
-  </table>
-{% endif %}
-{% if post|length %}
-  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
- background: #fff;">
-    <tr>
-      <td>
-        <h2>Post</h2>
-        <hr/>
-        <ol>
-          {% for key, value in post %}
-            <li>{{ key }}: {{ dump(value) }}</li>
-          {% endfor %}
-        </ol>
-      </td>
-    </tr>
-  </table>
-{% endif %}
-{% if session|length %}
-  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
- background: #fff;">
-    <tr>
-      <td>
-        <h2>Session</h2>
-        <hr/>
-        <ol>
-          {% for key, value in session %}
-            <li>{{ key }}: {{ dump(value) }}</li>
-          {% endfor %}
-        </ol>
-      </td>
-    </tr>
-  </table>
-{% endif %}
-{% if headers|length %}
-  <table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
- background: #fff;">
-    <tr>
-      <td>
-        <h2>Headers</h2>
-        <hr/>
-        <ol>
-          {% for key, value in headers %}
-            <li>{{ key }}: {{ dump(value) }}</li>
-          {% endfor %}
-        </ol>
-      </td>
-    </tr>
-  </table>
-{% endif %}
-<table style="padding: 10px 20px;margin: 10px auto; border-radius: 5px; border: 1px solid #adadad; width: 90%;
- background: #fff;">
-  <tr>
-    <td>
-      <h2>Stack Trace</h2>
-      <hr/>
-      <ol>
-        {% for line in trace %}
-          <li>{{ line }}</li>
-        {% endfor %}
-      </ol>
-    </td>
-  </tr>
-</table>
-</body>
-</html>
+{% endblock %}
