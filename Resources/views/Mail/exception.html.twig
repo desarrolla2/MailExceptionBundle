@@ -1,11 +1,11 @@
 {% extends '@MailException/Mail/layout.html.twig' %}
 {% block body %}
-  <table>
+  <table style="background: #fff;">
     <tr>
       <td><h1>{{ class }}: {{ message }}</h1></td>
     </tr>
   </table>
-  <table>
+  <table style="background: #fff;">
     <tr>
       <td>
         <h2>{{ 'information'|trans|capitalize }}</h2>
@@ -43,7 +43,7 @@
     </table>
   {% endif %}
   {% if get|length %}
-    <table>
+    <table style="background: #fff;">
       <tr>
         <td>
           <h2>{{ 'get parameters'|trans|capitalize }}</h2>
@@ -57,7 +57,7 @@
     </table>
   {% endif %}
   {% if post|length %}
-    <table>
+    <table style="background: #fff;">
       <tr>
         <td>
           <h2>{{ 'post parameters'|trans|capitalize }}</h2>
@@ -71,7 +71,7 @@
     </table>
   {% endif %}
   {% if session|length %}
-    <table>
+    <table style="background: #fff;">
       <tr>
         <td>
           <h2>{{ 'session'|trans|capitalize }}</h2>
@@ -85,7 +85,7 @@
     </table>
   {% endif %}
   {% if headers|length %}
-    <table>
+    <table style="background: #fff;">
       <tr>
         <td>
           <h2>{{ 'header'|trans|capitalize }}</h2>
@@ -98,7 +98,7 @@
       </tr>
     </table>
   {% endif %}
-  <table>
+  <table style="background: #fff;">
     <tr>
       <td>
         <h2>{{ 'stack trace'|trans|capitalize }}</h2>
