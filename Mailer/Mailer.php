@@ -67,14 +67,14 @@ class Mailer
 
     /**
      * Mailer constructor.
-     * @param \Swift_Mailer $mailer
-     * @param TwigEngine $twig
-     * @param RequestStack $stack
+     * @param \Swift_Mailer     $mailer
+     * @param TwigEngine        $twig
+     * @param RequestStack      $stack
      * @param TokenStorage|null $tokenStorage
-     * @param SessionInterface $session
-     * @param $from
-     * @param $to
-     * @param $subject
+     * @param SessionInterface  $session
+     * @param                   $from
+     * @param                   $to
+     * @param                   $subject
      */
     public function __construct(
         \Swift_Mailer $mailer,
@@ -101,7 +101,7 @@ class Mailer
 
     /**
      * @param \Exception $exception
-     * @param array $extra
+     * @param array      $extra
      *
      * @return int
      */
@@ -127,7 +127,7 @@ class Mailer
 
     /**
      * @param \Exception $exception
-     * @param array $extra
+     * @param array      $extra
      *
      * @return string
      */
