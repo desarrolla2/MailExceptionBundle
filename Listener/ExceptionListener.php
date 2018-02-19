@@ -58,6 +58,16 @@ class ExceptionListener implements EventSubscriberInterface
     }
 
     /**
+     * @return array
+     */
+    public static function getSubscribedEvents()
+    {
+        return [
+            'kernel.exception' => 'onKernelException',
+        ];
+    }
+
+    /**
      * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
      *
      * @return int|void
@@ -71,21 +81,6 @@ class ExceptionListener implements EventSubscriberInterface
         }
 
         return $this->mailer->notify($exception);
-    }
-
-    /**
-     * @param Exception $exception
-     *
-     * @return bool
-     */
-    protected function isValidException(\Exception $exception)
-    {
-        $class = get_class($exception);
-        if (in_array($class, $this->avoidExceptions)) {
-            return false;
-        }
-
-        return true;
     }
 
     /**
@@ -103,12 +98,17 @@ class ExceptionListener implements EventSubscriberInterface
     }
 
     /**
-     * @return array
+     * @param Exception $exception
+     *
+     * @return bool
      */
-    public static function getSubscribedEvents()
+    protected function isValidException(\Exception $exception)
     {
-        return [
-            'kernel.exception' => 'onKernelException',
-        ];
+        $class = get_class($exception);
+        if (in_array($class, $this->avoidExceptions)) {
+            return false;
+        }
+
+        return true;
     }
 }

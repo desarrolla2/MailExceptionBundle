@@ -15,14 +15,19 @@
 
 namespace Desarrolla2\Bundle\MailExceptionBundle\Twig\Extension;
 
-use Symfony\Component\HttpKernel\DataCollector\Util\ValueExporter;
-
 class ValueExporterExtension extends \Twig_Extension
 {
     /**
-     * @var ValueExporter
+     * @param $vars
+     * @return string
      */
-    private $valueExporter;
+    public function dump($vars)
+    {
+        ob_start();
+        echo sprintf('<pre>%s</pre>', print_r($vars, true));
+
+        return ob_get_clean();
+    }
 
     /**
      * {@inheritdoc}
@@ -30,24 +35,13 @@ class ValueExporterExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('value_dump', [$this, 'dumpValue']),
+            new \Twig_SimpleFunction(
+                'value_dump',
+                [$this, 'dump'],
+                [
+                    'is_safe' => ['html'],
+                ]
+            ),
         ];
-    }
-
-    public function dumpValue($value)
-    {
-        if (null === $this->valueExporter) {
-            $this->valueExporter = new ValueExporter();
-        }
-
-        return $this->valueExporter->exportValue($value);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'value_exporter';
     }
 }

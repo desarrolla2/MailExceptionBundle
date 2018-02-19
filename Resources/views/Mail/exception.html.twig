@@ -35,7 +35,7 @@
           <h2>{{ 'extra information'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in extra %}
-              <li>{{ key }}: {{ dump(value) }}</li>
+              <li>{{ key }}: {{ value_dump(value) }}</li>
             {% endfor %}
           </ol>
         </td>
@@ -49,7 +49,7 @@
           <h2>{{ 'get parameters'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in get %}
-              <li>{{ key }}: {{ dump(value) }}</li>
+              <li>{{ key }}: {{ value_dump(value) }}</li>
             {% endfor %}
           </ol>
         </td>
@@ -63,7 +63,7 @@
           <h2>{{ 'post parameters'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in post %}
-              <li>{{ key }}: {{ dump(value) }}</li>
+              <li>{{ key }}: {{ value_dump(value) }}</li>
             {% endfor %}
           </ol>
         </td>
@@ -77,7 +77,7 @@
           <h2>{{ 'session'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in session %}
-              <li>{{ key }}: {{ dump(value) }}</li>
+              <li>{{ key }}: {{ value_dump(value) }}</li>
             {% endfor %}
           </ol>
         </td>
@@ -91,7 +91,7 @@
           <h2>{{ 'header'|trans|capitalize }}</h2>
           <ol>
             {% for key, value in headers %}
-              <li>{{ key }}: {{ dump(value) }}</li>
+              <li>{{ key }}: {{ value_dump(value) }}</li>
             {% endfor %}
           </ol>
         </td>

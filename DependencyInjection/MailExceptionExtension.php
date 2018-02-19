@@ -38,8 +38,8 @@ class MailExceptionExtension extends Extension
             $container->setParameter('exception_listener.avoid.environments', $config['avoid']['environments']);
             $container->setParameter('exception_listener.avoid.exceptions', $config['avoid']['exceptions']);
         } else {
-            $container->setParameter('exception_listener.avoid.environments', array());
-            $container->setParameter('exception_listener.avoid.exceptions', array());
+            $container->setParameter('exception_listener.avoid.environments', []);
+            $container->setParameter('exception_listener.avoid.exceptions', []);
         }
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
