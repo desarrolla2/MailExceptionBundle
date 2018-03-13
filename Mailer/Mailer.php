@@ -118,11 +118,15 @@ class Mailer
     }
 
     /**
-     * @return \Swift_Mime_SimpleMessage
+     * @return \Swift_Message
      */
     protected function createMessage()
     {
-        return \Swift_Message::newInstance();
+        if (method_exists(\Swift_Message::class, 'newInstance')) {
+            return \Swift_Message::newInstance();
+        }
+
+        return new \Swift_Message();
     }
 
     /**
